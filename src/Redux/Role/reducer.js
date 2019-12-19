@@ -1,21 +1,15 @@
 import constants from './constants';
 
 const initialState = {
-  applications: null,
-  selectedApp: ''
+  roles: null
 };
 
 export default (state = initialState, { type, payload }) => {
   switch (type) {
-    case constants.RECIEVED_APPLICATIONS:
+    case constants.RECIEVED_ROLES:
       return {
         ...state,
-        applications: payload
-      };
-    case constants.SET_SELECTED_APP:
-      return {
-        ...state,
-        selectedApp: payload
+        roles: payload
       };
     case constants.RECIEVED_ERROR:
       return { ...state, error: payload.message };

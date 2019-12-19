@@ -4,13 +4,8 @@ import constants from './constants';
 const apiUri = process.env.REACT_APP_API_URI;
 
 // action creators
-export const recievedApplications = payload => ({
-  type: constants.RECIEVED_APPLICATIONS,
-  payload
-});
-
-export const setSelectedApp = payload => ({
-  type: constants.SET_SELECTED_APP,
+export const recievedRoles = payload => ({
+  type: constants.RECIEVED_ROLES,
   payload
 });
 
@@ -20,14 +15,14 @@ export const recievedError = payload => ({
 });
 
 // side effects
-export const getApplications = () => dispatch =>
+export const getRoles = appId => dispatch =>
   axios
-    .get(`${apiUri}/apps`, {
+    .get(`${apiUri}/roles/${appId}`, {
       method: 'GET',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json'
       }
     })
-    .then(res => dispatch(recievedApplications(res.data)))
+    .then(res => dispatch(recievedRoles(res.data)))
     .catch(err => dispatch(recievedError(err)));

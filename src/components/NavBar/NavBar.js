@@ -1,5 +1,5 @@
 /* eslint-disable comma-dangle */
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/styles';
@@ -29,9 +29,8 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const NavBar = ({ applications }) => {
+const NavBar = ({ applications, selectedApp, setSelectedApp }) => {
   const classes = useStyles();
-  const [selectedApp, setSelectedApp] = useState('');
   return (
     applications && (
       <AppBar className={classes.appBar} position="sticky">
@@ -52,7 +51,9 @@ const NavBar = ({ applications }) => {
                 Select Application
               </MenuItem>
               {applications.map(app => (
-                <MenuItem value={app.id}>{app.name}</MenuItem>
+                <MenuItem key={app.id} value={app.id}>
+                  {app.name}
+                </MenuItem>
               ))}
             </Select>
           </FormControl>
@@ -68,7 +69,8 @@ NavBar.propTypes = {
       id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired
     })
-  )
+  ),
+  selectedApp: PropTypes.string.isRequired
 };
 
 NavBar.defaultProps = {
@@ -76,7 +78,8 @@ NavBar.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-  applications: state.application.applications
+  applications: state.application.applications,
+  selectedApp: state.application.selectedApp
 });
 
 export default connect(mapStateToProps)(NavBar);
