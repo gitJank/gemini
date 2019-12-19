@@ -2,7 +2,6 @@
 
 # dependencies
 *node_modules
-*build
 *db.json
 /.pnp
 .pnp.js
