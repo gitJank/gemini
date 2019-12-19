@@ -29,9 +29,9 @@ app.get('/roles/:appId', (req, res) => {
 });
 
 // serve frontend bundle\
-app.use(express.static(path.join(__dirname, 'build')));
+app.use(express.static(path.join(__dirname, '../build')));
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+  res.sendFile(path.join(__dirname, '../build', 'index.html'));
 });
 
 // start the server

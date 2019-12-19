@@ -15,10 +15,8 @@ export const recievedError = payload => ({
 });
 
 // side effects
-export const getApplications = () => dispatch => {
-  console.log(apiUri);
-
-  return axios
+export const getApplications = () => dispatch =>
+  axios
     .get(`${apiUri}/apps`, {
       method: 'GET',
       headers: {
@@ -28,4 +26,3 @@ export const getApplications = () => dispatch => {
     })
     .then(res => dispatch(recievedApplications(res.data)))
     .catch(err => dispatch(recievedError(err)));
-};
