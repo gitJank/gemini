@@ -18,6 +18,8 @@
   "plugins": ["react"],
   "rules": {
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/forbid-prop-types": [1, { "forbid": ["any"] }],
+    "operator-linebreak": "off",
     "comma-dangle": ["error", "never"],
     "arrow-parens": "off",
     "implicit-arrow-linebreak": "off",

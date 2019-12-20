@@ -16,33 +16,25 @@ const useStyles = makeStyles({
     width: 650,
     height: 800,
     margin: '0px 64px'
-  },
-  tableRow: {
-    cursor: 'pointer'
   }
 });
 
-const RolesView = ({ roles, handleSelectRole }) => {
+const ScopesView = ({ scopes }) => {
   const classes = useStyles();
 
   return (
     <TableContainer className={classes.table} component={Paper}>
-      <Table aria-label="roles table">
+      <Table aria-label="scopes table">
         <TableHead>
           <TableRow>
-            <TableCell>Roles</TableCell>
+            <TableCell>Scopes</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {roles.map(role => (
-            <TableRow
-              hover
-              className={classes.tableRow}
-              onClick={() => handleSelectRole(role.id)}
-              key={role.id}
-            >
+          {scopes.map(scope => (
+            <TableRow key={scope.id}>
               <TableCell component="th" scope="row">
-                {role.name}
+                {scope.name}
               </TableCell>
             </TableRow>
           ))}
@@ -52,9 +44,8 @@ const RolesView = ({ roles, handleSelectRole }) => {
   );
 };
 
-RolesView.propTypes = {
-  roles: PropTypes.array.isRequired,
-  handleSelectRole: PropTypes.func.isRequired
+ScopesView.propTypes = {
+  scopes: PropTypes.array.isRequired
 };
 
-export default RolesView;
+export default ScopesView;

@@ -1,27 +1,28 @@
 import constants from './constants';
 
 const initialState = {
-  roles: null,
-  selectedRole: null
+  scopes: null,
+  assignedScopes: null
 };
 
 export default (state = initialState, { type, payload }) => {
   switch (type) {
-    case constants.RECIEVED_ROLES:
+    case constants.RECIEVED_SCOPES:
       return {
         ...state,
-        roles: payload
+        scopes: payload
       };
-    case constants.ROLE_SELECTED:
+    case constants.RECIEVED_ASSIGNED_SCOPES:
       return {
         ...state,
-        selectedRole: payload
+        assignedScopes: [...payload]
       };
-    case constants.SELECTED_ROLE_CLEARED:
+    case constants.ASSIGNED_SCOPES_CLEARED:
       return {
         ...state,
-        selectedRole: null
+        assignedScopes: null
       };
+
     case constants.RECIEVED_ERROR:
       return { ...state, error: payload.message };
     default:

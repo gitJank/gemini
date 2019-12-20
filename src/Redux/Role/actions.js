@@ -9,6 +9,15 @@ export const recievedRoles = payload => ({
   payload
 });
 
+export const selectRole = payload => ({
+  type: constants.ROLE_SELECTED,
+  payload
+});
+
+export const clearSelectedRole = () => ({
+  type: constants.SELECTED_ROLE_CLEARED
+});
+
 export const recievedError = payload => ({
   type: constants.RECIEVED_ERROR,
   payload

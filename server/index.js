@@ -28,9 +28,34 @@ app.get('/roles/:appId', (req, res) => {
   );
 });
 
+app.get('/scopes/:appId', (req, res) => {
+  const { appId } = req.params;
+
+  const scopes = db
+    .get('scopes')
+    .filter({ appId })
+    .value();
+
+  res.send(scopes);
+});
+
+app.get('/scopes/:appId/:roleId', (req, res) => {
+  const { appId, roleId } = req.params;
+
+  const scopes = db
+    .get('scopes')
+    .filter({ appId, roleId })
+    .value()
+    .map(scope => scope.id);
+
+  console.log(scopes);
+
+  res.send(scopes);
+});
+
 // serve frontend bundle\
 app.use(express.static(path.join(__dirname, '../build')));
-app.get('*', (req, res) => {
+app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../build', 'index.html'));
 });
 

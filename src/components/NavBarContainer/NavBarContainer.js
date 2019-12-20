@@ -7,6 +7,7 @@ import {
   getApplications,
   setSelectedApp
 } from '../../Redux/Application/actions';
+import { clearSelectedRole } from '../../Redux/Role/actions';
 
 const NavBarContainer = ({ handleGetApplications, handleSetSelectedApp }) => {
   useEffect(() => {
@@ -27,6 +28,7 @@ const mapDispatchToProps = dispatch => ({
   },
   handleSetSelectedApp: id => {
     dispatch(setSelectedApp(id));
+    dispatch(clearSelectedRole());
   }
 });
 
