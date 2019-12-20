@@ -29,13 +29,13 @@ const roleTypes = ['Admin', 'Viewer', 'Scheduler', 'Manager'];
 
 const getRandomAppName = () => {
   const noun = sentencer.make('{{ noun }}');
-  const appType = appTypes[getRandomNum(0, 5)];
+  const appType = appTypes[getRandomNum(1, 6) - 1];
   return `${capitalize(noun)} ${appType}`;
 };
 
 const getRandomRoleName = () => {
   const noun = sentencer.make('{{ noun }}');
-  const roleType = roleTypes[getRandomNum(0, 3)];
+  const roleType = roleTypes[getRandomNum(1, 4) - 1];
   return `${capitalize(noun)} ${roleType}`;
 };
 
@@ -71,13 +71,13 @@ for (let x = 0; x < getRandomNum(3, 5); x++) {
         id: uuidv1(),
         name: scope.read,
         appId,
-        roleId: roleIds[getRandomNum(0, roleIds.length - 1)]
+        roleId: roleIds[getRandomNum(1, roleIds.length) - 1]
       },
       {
         id: uuidv1(),
         name: scope.write,
         appId,
-        roleId: roleIds[getRandomNum(0, roleIds.length - 1)]
+        roleId: roleIds[getRandomNum(1, roleIds.length) - 1]
       }
     );
   }
