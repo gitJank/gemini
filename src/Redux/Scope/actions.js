@@ -14,6 +14,10 @@ export const recievedAssignedScopes = payload => ({
   payload
 });
 
+export const clearScopes = () => ({
+  type: constants.SCOPES_CLEARED
+});
+
 export const clearAssignedScopes = () => ({
   type: constants.ASSIGNED_SCOPES_CLEARED
 });

@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/styles';
 import RolesContainer from '../RolesContainer/RolesContainer';
 import ScopesContainer from '../ScopesContainer/ScopesContainer';
 import ScopesSelectionContainer from '../ScopesSelectionContainer/ScopesSelectionContainer';
+import CreateAppModal from '../CreateAppModal/CreateAppModal';
 
 const useStyles = makeStyles({
   root: {
@@ -17,10 +18,13 @@ const useStyles = makeStyles({
 const Content = ({ selectedRole }) => {
   const classes = useStyles();
   return (
-    <div className={classes.root}>
-      <RolesContainer />
-      {!selectedRole ? <ScopesContainer /> : <ScopesSelectionContainer />}
-    </div>
+    <>
+      <div className={classes.root}>
+        <RolesContainer />
+        {!selectedRole ? <ScopesContainer /> : <ScopesSelectionContainer />}
+      </div>
+      <CreateAppModal />
+    </>
   );
 };
 

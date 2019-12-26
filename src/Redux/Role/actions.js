@@ -14,6 +14,10 @@ export const selectRole = payload => ({
   payload
 });
 
+export const clearRoles = () => ({
+  type: constants.ROLES_CLEARED
+});
+
 export const clearSelectedRole = () => ({
   type: constants.SELECTED_ROLE_CLEARED
 });

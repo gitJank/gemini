@@ -18,6 +18,19 @@ app.get('/apps', (req, res) => {
   res.send(db.get('apps').value());
 });
 
+app.post('/apps', (req, res) => {
+  const {
+    data: { appId, appName }
+  } = req.body;
+
+  const newApps = db
+    .get('apps')
+    .push({ id: appId, name: appName })
+    .write();
+
+  res.send(newApps);
+});
+
 app.get('/roles/:appId', (req, res) => {
   const { appId } = req.params;
   res.send(

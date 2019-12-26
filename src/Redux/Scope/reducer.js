@@ -17,12 +17,15 @@ export default (state = initialState, { type, payload }) => {
         ...state,
         assignedScopes: [...payload]
       };
+    case constants.SCOPES_CLEARED:
+      return {
+        ...initialState
+      };
     case constants.ASSIGNED_SCOPES_CLEARED:
       return {
         ...state,
         assignedScopes: null
       };
-
     case constants.RECIEVED_ERROR:
       return { ...state, error: payload.message };
     default:

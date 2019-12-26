@@ -17,6 +17,10 @@ export default (state = initialState, { type, payload }) => {
         ...state,
         selectedRole: payload
       };
+    case constants.ROLES_CLEARED:
+      return {
+        ...initialState
+      };
     case constants.SELECTED_ROLE_CLEARED:
       return {
         ...state,

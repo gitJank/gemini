@@ -4,7 +4,7 @@ const colors = {
   darkCyan: {
     light: '#31c0ba',
     main: '#29a19c',
-    dark: '##21827e',
+    dark: '#21827e',
     contrastText: '#fff'
   },
   darkGrey: {
@@ -30,5 +30,16 @@ export default createMuiTheme({
       default: colors.darkGrey.light
     }
   },
-  overrides: {}
+  overrides: {
+    MuiOutlinedInput: {
+      input: {
+        color: colors.white
+      }
+    },
+    MuiButton: {
+      root: {
+        color: colors.white
+      }
+    }
+  }
 });

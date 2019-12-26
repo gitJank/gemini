@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/styles';
+import Add from '@material-ui/icons/Add';
 import {
   AppBar,
   Toolbar,
@@ -29,8 +30,14 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const NavBar = ({ applications, selectedApp, setSelectedApp }) => {
+const NavBar = ({
+  applications,
+  selectedApp,
+  setSelectedApp,
+  handleOpenCreateApplication
+}) => {
   const classes = useStyles();
+  const ADD_APP = 'add_app';
   return (
     applications && (
       <AppBar className={classes.appBar} position="sticky">
@@ -42,7 +49,11 @@ const NavBar = ({ applications, selectedApp, setSelectedApp }) => {
               id="demo-simple-select-outlined"
               value={selectedApp}
               displayEmpty
-              onChange={e => setSelectedApp(e.target.value)}
+              onChange={e =>
+                e.target.value === ADD_APP
+                  ? handleOpenCreateApplication()
+                  : setSelectedApp(e.target.value)
+              }
               MenuProps={{
                 classes: { paper: classes.selectMenu }
               }}
@@ -55,6 +66,10 @@ const NavBar = ({ applications, selectedApp, setSelectedApp }) => {
                   {app.name}
                 </MenuItem>
               ))}
+              <MenuItem value={ADD_APP}>
+                <Add />
+                Create Application
+              </MenuItem>
             </Select>
           </FormControl>
         </Toolbar>
@@ -70,7 +85,9 @@ NavBar.propTypes = {
       name: PropTypes.string.isRequired
     })
   ),
-  selectedApp: PropTypes.string.isRequired
+  selectedApp: PropTypes.string.isRequired,
+  setSelectedApp: PropTypes.func.isRequired,
+  handleOpenCreateApplication: PropTypes.func.isRequired
 };
 
 NavBar.defaultProps = {

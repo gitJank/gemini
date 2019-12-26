@@ -19,6 +19,9 @@
   "rules": {
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "react/forbid-prop-types": [1, { "forbid": ["any"] }],
+    "react/jsx-curly-newline": "off",
+    "object-curly-newline": "off",
+    "no-confusing-arrow": "off",
     "operator-linebreak": "off",
     "comma-dangle": ["error", "never"],
     "arrow-parens": "off",

@@ -5,21 +5,33 @@ import { connect } from 'react-redux';
 import NavBar from '../NavBar/NavBar';
 import {
   getApplications,
-  setSelectedApp
+  setSelectedApp,
+  openCreateApplication
 } from '../../Redux/Application/actions';
-import { clearSelectedRole } from '../../Redux/Role/actions';
+import { clearSelectedRole, clearRoles } from '../../Redux/Role/actions';
+import { clearScopes } from '../../Redux/Scope/actions';
 
-const NavBarContainer = ({ handleGetApplications, handleSetSelectedApp }) => {
+const NavBarContainer = ({
+  handleGetApplications,
+  handleSetSelectedApp,
+  handleOpenCreateApplication
+}) => {
   useEffect(() => {
     handleGetApplications();
   }, [handleGetApplications]);
 
-  return <NavBar setSelectedApp={handleSetSelectedApp} />;
+  return (
+    <NavBar
+      setSelectedApp={handleSetSelectedApp}
+      handleOpenCreateApplication={handleOpenCreateApplication}
+    />
+  );
 };
 
 NavBarContainer.propTypes = {
   handleGetApplications: PropTypes.func.isRequired,
-  handleSetSelectedApp: PropTypes.func.isRequired
+  handleSetSelectedApp: PropTypes.func.isRequired,
+  handleOpenCreateApplication: PropTypes.func.isRequired
 };
 
 const mapDispatchToProps = dispatch => ({
@@ -27,8 +39,13 @@ const mapDispatchToProps = dispatch => ({
     dispatch(getApplications());
   },
   handleSetSelectedApp: id => {
-    dispatch(setSelectedApp(id));
     dispatch(clearSelectedRole());
+    dispatch(setSelectedApp(id));
+  },
+  handleOpenCreateApplication: () => {
+    dispatch(clearScopes());
+    dispatch(clearRoles());
+    dispatch(openCreateApplication());
   }
 });
 

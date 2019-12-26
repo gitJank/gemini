@@ -19,14 +19,37 @@ export const recievedError = payload => ({
   payload
 });
 
+export const openCreateApplication = payload => ({
+  type: constants.OPEN_CREATE_APPLICATION,
+  payload
+});
+
+export const closeCreateApplication = () => ({
+  type: constants.CLOSE_CREATE_APPLICATION
+});
+
 // side effects
 export const getApplications = () => dispatch =>
   axios
     .get(`${apiUri}/apps`, {
-      method: 'GET',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json'
+      }
+    })
+    .then(res => dispatch(recievedApplications(res.data)))
+    .catch(err => dispatch(recievedError(err)));
+
+export const createApplication = (appId, appName) => dispatch =>
+  axios
+    .post(`${apiUri}/apps`, {
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      data: {
+        appId,
+        appName
       }
     })
     .then(res => dispatch(recievedApplications(res.data)))
