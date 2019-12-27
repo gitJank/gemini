@@ -2,12 +2,13 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import RolesView from '../RolesView/RolesView';
-import { getRoles, selectRole } from '../../Redux/Role/actions';
+import { getRoles, selectRole, createRole } from '../../Redux/Role/actions';
 
 const RolesContainer = ({
   roles,
   handleSelectRole,
   handleGetRoles,
+  handleCreateRole,
   selectedApp
 }) => {
   useEffect(() => {
@@ -15,7 +16,14 @@ const RolesContainer = ({
   }, [handleGetRoles, selectedApp]);
 
   return (
-    roles && <RolesView roles={roles} handleSelectRole={handleSelectRole} />
+    roles && (
+      <RolesView
+        roles={roles}
+        selectedApp={selectedApp}
+        handleSelectRole={handleSelectRole}
+        handleCreateRole={handleCreateRole}
+      />
+    )
   );
 };
 
@@ -23,6 +31,7 @@ RolesContainer.propTypes = {
   roles: PropTypes.array,
   handleSelectRole: PropTypes.func.isRequired,
   handleGetRoles: PropTypes.func.isRequired,
+  handleCreateRole: PropTypes.func.isRequired,
   selectedApp: PropTypes.string
 };
 
@@ -42,6 +51,9 @@ const mapDispatchToProps = dispatch => ({
   },
   handleGetRoles: selectedApp => {
     dispatch(getRoles(selectedApp));
+  },
+  handleCreateRole: (roleName, selectedApp) => {
+    dispatch(createRole(roleName, selectedApp));
   }
 });
 

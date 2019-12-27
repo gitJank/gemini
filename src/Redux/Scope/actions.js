@@ -51,3 +51,33 @@ export const getAssignedScopes = (appId, roleId) => dispatch =>
     })
     .then(res => dispatch(recievedAssignedScopes(res.data)))
     .catch(err => dispatch(recievedError(err)));
+
+export const createScope = (scopeName, appId) => dispatch =>
+  axios
+    .post(`${apiUri}/scopes`, {
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      data: {
+        scopeName,
+        appId
+      }
+    })
+    .then(res => dispatch(recievedScopes(res.data)))
+    .catch(err => dispatch(recievedError(err)));
+
+export const assignScope = (scopeId, roleId) => dispatch =>
+  axios
+    .put(`${apiUri}/scopes`, {
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      data: {
+        scopeId,
+        roleId
+      }
+    })
+    .then(res => dispatch(recievedScopes(res.data)))
+    .catch(err => dispatch(recievedError(err)));

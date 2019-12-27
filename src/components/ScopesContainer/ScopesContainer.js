@@ -2,14 +2,27 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import ScopesView from '../ScopesView/ScopesView';
-import { getScopes } from '../../Redux/Scope/actions';
+import { getScopes, createScope } from '../../Redux/Scope/actions';
 
-const ScopesContainer = ({ scopes, handleGetScopes, selectedApp }) => {
+const ScopesContainer = ({
+  scopes,
+  selectedApp,
+  handleGetScopes,
+  handleCreateScope
+}) => {
   useEffect(() => {
     if (selectedApp) handleGetScopes(selectedApp);
   }, [handleGetScopes, selectedApp]);
 
-  return scopes && <ScopesView scopes={scopes} />;
+  return (
+    scopes && (
+      <ScopesView
+        scopes={scopes}
+        selectedApp={selectedApp}
+        handleCreateScope={handleCreateScope}
+      />
+    )
+  );
 };
 
 ScopesContainer.propTypes = {
@@ -31,6 +44,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   handleGetScopes: selectedApp => {
     dispatch(getScopes(selectedApp));
+  },
+  handleCreateScope: (scopeName, selectedApp) => {
+    dispatch(createScope(scopeName, selectedApp));
   }
 });
 

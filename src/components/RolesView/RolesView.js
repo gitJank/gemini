@@ -35,10 +35,23 @@ const useStyles = makeStyles({
   }
 });
 
-const RolesView = ({ roles, handleSelectRole }) => {
+const RolesView = ({
+  roles,
+  selectedApp,
+  handleSelectRole,
+  handleCreateRole
+}) => {
   const classes = useStyles();
 
   const [showAddRole, setShowAddRole] = useState(false);
+  const [roleName, setRoleName] = useState('');
+
+  const saveRoleClicked = () => {
+    if (roleName) {
+      handleCreateRole(roleName, selectedApp);
+      setRoleName('');
+    }
+  };
 
   return (
     <TableContainer className={classes.table} component={Paper}>
@@ -47,8 +60,8 @@ const RolesView = ({ roles, handleSelectRole }) => {
           <TableRow>
             <TableCell>Roles</TableCell>
             <TableCell align="right">
-              <IconButton aria-label="add">
-                <Add onClick={() => setShowAddRole(true)} />
+              <IconButton onClick={() => setShowAddRole(true)} aria-label="add">
+                <Add />
               </IconButton>
             </TableCell>
           </TableRow>
@@ -76,6 +89,8 @@ const RolesView = ({ roles, handleSelectRole }) => {
               >
                 <TextField
                   className={classes.textfield}
+                  value={roleName}
+                  onChange={e => setRoleName(e.target.value)}
                   label="Name"
                   variant="outlined"
                   margin="dense"
@@ -83,13 +98,13 @@ const RolesView = ({ roles, handleSelectRole }) => {
               </TableCell>
               <TableCell align="right" className={classes.tableCellDense}>
                 <Tooltip title="Save" aria-label="save" placement="top">
-                  <IconButton>
+                  <IconButton onClick={() => saveRoleClicked()}>
                     <Check />
                   </IconButton>
                 </Tooltip>
                 <Tooltip title="Cancel" aria-label="cancel" placement="top">
-                  <IconButton>
-                    <Close onClick={() => setShowAddRole(false)} />
+                  <IconButton onClick={() => setShowAddRole(false)}>
+                    <Close />
                   </IconButton>
                 </Tooltip>
               </TableCell>
@@ -103,7 +118,9 @@ const RolesView = ({ roles, handleSelectRole }) => {
 
 RolesView.propTypes = {
   roles: PropTypes.array.isRequired,
-  handleSelectRole: PropTypes.func.isRequired
+  selectedApp: PropTypes.string.isRequired,
+  handleSelectRole: PropTypes.func.isRequired,
+  handleCreateRole: PropTypes.func.isRequired
 };
 
 export default RolesView;

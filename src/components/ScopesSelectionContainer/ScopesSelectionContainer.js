@@ -17,6 +17,8 @@ const ScopesSelectionContainer = ({
     }
   }, [handleGetAssignedScopes, selectedApp, selectedRole]);
 
+  console.log(assignedScopes);
+
   return assignedScopes ? (
     <ScopesSelectionView scopes={scopes} assignedScopes={assignedScopes} />
   ) : null;

@@ -39,3 +39,18 @@ export const getRoles = appId => dispatch =>
     })
     .then(res => dispatch(recievedRoles(res.data)))
     .catch(err => dispatch(recievedError(err)));
+
+export const createRole = (roleName, appId) => dispatch =>
+  axios
+    .post(`${apiUri}/roles`, {
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      data: {
+        roleName,
+        appId
+      }
+    })
+    .then(res => dispatch(recievedRoles(res.data)))
+    .catch(err => dispatch(recievedError(err)));

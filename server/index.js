@@ -4,6 +4,7 @@ const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
 const path = require('path');
+const uuidv1 = require('uuid/v1');
 const db = require('./db');
 
 const app = express();
@@ -41,6 +42,19 @@ app.get('/roles/:appId', (req, res) => {
   );
 });
 
+app.post('/roles', (req, res) => {
+  const {
+    data: { roleName, appId }
+  } = req.body;
+
+  const result = db
+    .get('roles')
+    .push({ id: uuidv1(), name: roleName, appId })
+    .write();
+
+  res.send(result.filter(role => role.appId === appId));
+});
+
 app.get('/scopes/:appId', (req, res) => {
   const { appId } = req.params;
 
@@ -61,9 +75,34 @@ app.get('/scopes/:appId/:roleId', (req, res) => {
     .value()
     .map(scope => scope.id);
 
-  console.log(scopes);
-
   res.send(scopes);
+});
+
+app.post('/scopes', async (req, res) => {
+  const {
+    data: { scopeName, appId }
+  } = req.body;
+
+  const result = db
+    .get('scopes')
+    .push({ id: uuidv1(), name: scopeName, appId })
+    .write();
+
+  res.send(result.filter(scope => scope.appId === appId));
+});
+
+app.put('/scopes', (req, res) => {
+  const {
+    data: { roleId, scopeId }
+  } = req.body;
+
+  res.send(
+    db
+      .get('scopes')
+      .filter({ id: scopeId })
+      .assign({ roleId })
+      .write()
+  );
 });
 
 // serve frontend bundle\

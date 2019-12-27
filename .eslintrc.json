@@ -21,6 +21,7 @@
     "react/forbid-prop-types": [1, { "forbid": ["any"] }],
     "react/jsx-curly-newline": "off",
     "object-curly-newline": "off",
+    "function-paren-newline": "off",
     "no-confusing-arrow": "off",
     "operator-linebreak": "off",
     "comma-dangle": ["error", "never"],
