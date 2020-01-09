@@ -38,7 +38,21 @@ export default createMuiTheme({
     },
     MuiButton: {
       root: {
-        color: colors.white
+        color: colors.white,
+        padding: '8px'
+      },
+      text: {
+        padding: '8px'
+      }
+    },
+    MuiTableCell: {
+      head: {
+        padding: '8px 16px'
+      }
+    },
+    MuiIconButton: {
+      root: {
+        padding: '8px'
       }
     }
   }

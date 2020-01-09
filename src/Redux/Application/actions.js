@@ -14,18 +14,21 @@ export const setSelectedApp = payload => ({
   payload
 });
 
-export const recievedError = payload => ({
-  type: constants.RECIEVED_ERROR,
-  payload
-});
-
-export const openCreateApplication = payload => ({
-  type: constants.OPEN_CREATE_APPLICATION,
-  payload
+export const openCreateApplication = () => ({
+  type: constants.OPEN_CREATE_APPLICATION
 });
 
 export const closeCreateApplication = () => ({
   type: constants.CLOSE_CREATE_APPLICATION
+});
+
+export const isLoading = () => ({
+  type: constants.IS_LOADING
+});
+
+export const recievedError = payload => ({
+  type: constants.RECIEVED_ERROR,
+  payload
 });
 
 // side effects

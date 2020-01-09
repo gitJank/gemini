@@ -1,0 +1,3 @@
+buildType: npm
+runUnitTests: true
+deployPCF: false

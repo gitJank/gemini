@@ -1,0 +1,5 @@
+applications:
+  - name: ascensionid-authm-ui
+    path: ./build
+    memory: 256M
+    buildpack: staticfile_buildpack
